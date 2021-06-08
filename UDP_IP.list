@@ -24,6 +24,8 @@ IP-CIDR,138.128.136.0/22,no-resolve
 # 美西-华盛顿州
 IP-CIDR,213.179.212.0/22,no-resolve
 
+DOMAIN-SUFFIX,discord.media
+
 # Clubhouse
 IP-CIDR,148.153.172.0/22,no-resolve
 
