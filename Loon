@@ -1,0 +1,105 @@
+[General]
+# 路由
+ipv6 = false
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+dns-server = 114.114.114.114,119.29.29.29,223.5.5.5
+allow-udp-proxy = true
+allow-wifi-access = false
+wifi-access-http-port = 7222
+wifi-access-socket5-port = 7221
+
+# URL test
+proxy-test-url = http://www.gstatic.com/generate_204
+test-timeout = 2
+
+# 资源解析器
+resource-parser = https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/scripts/sub-store-parser.js
+
+[Host]
+*.tencent.com = server:119.28.28.28
+*.weixin.com = server:119.28.28.28
+
+[Remote Proxy]
+
+#筛选地区
+[Remote Filter]
+🇭🇰 香港 = FilterKey = "(?i:HK|Hong.*?Kong|HKT|HKBN|HGC|WTT|CMI|[^-]港)"
+🇹🇼 台湾 = FilterKey = "(?i:TW|Taiwan|新北|彰化|CHT|台湾|[^-]台|HINET)"
+🇸🇬 新加坡 = FilterKey = "(?i:SG|Singapore|新加坡|狮城|[^-]新)"
+🇯🇵 日本 = FilterKey = "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)"
+🇺🇲 美国 = FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
+🇰🇷 韩国 = FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
+🎥 流媒体 = FilterKey = "(?i:流媒体|原生|NF|奈飞|解锁|NETFLIX|Media)"
+
+[Proxy]
+
+[Proxy Group]
+# 策略组
+🚀 节点选择 = select, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, direct
+🚀 手动切换 = select, DIRECT, FilterKey = ".*"
+🎯 UDP = select, 🚀 手动切换, DIRECT
+📲 Telegram = select, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, DIRECT
+🐦 Twitter = select, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, DIRECT
+📹 YouTube = select, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, DIRECT
+🎥 NETFLIX = select, 🎥 流媒体, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, DIRECT
+📺 巴哈姆特 = select, 🚀 节点选择, 🇹🇼 台湾, DIRECT
+📺 Bilibili = select, DIRECT, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡
+🌍 国外媒体 = select, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, DIRECT
+🌏 国内媒体 = select, DIRECT, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国
+🍎 Apple = select, DIRECT, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国
+🎮 游戏平台 = select, DIRECT, 🚀 节点选择, 🚀 手动切换, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国
+🎯 全球直连 = select, DIRECT, 🚀 节点选择
+🍃 应用净化 = select, REJECT, DIRECT
+🛑 广告拦截 = select, REJECT, DIRECT
+🐟 漏网之鱼 = select, 🚀 节点选择, DIRECT
+
+[Rule]
+GEOIP,CN,DIRECT
+FINAL,🐟 漏网之鱼
+
+# 远程分流
+[Remote Rule] 
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list, tag=🛑 广告拦截, policy=🛑 广告拦截, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list, tag=🍃 应用净化, policy=🍃 应用净化, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitter.list, tag=🐦 Twitter, policy=🐦 Twitter, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list, tag=🍎 Apple, policy=🍎 Apple, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list, tag=📲 Telegram, policy=📲 Telegram, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list, tag=🎮 游戏平台, policy=🎮 游戏平台, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list, tag=🎮 游戏平台, policy=🎮 游戏平台, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list, tag=🎮 游戏平台, policy=🎮 游戏平台, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list, tag=📹 YouTube, policy=📹 YouTube, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list, tag=🎥 NETFLIX, policy=🎥 NETFLIX, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list, tag=📺 巴哈姆特, policy=📺 巴哈姆特, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list, tag=📺 Bilibili, policy=📺 Bilibili, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list, tag=📺 Bilibili, policy=📺 Bilibili, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list, tag=🌏 国内媒体, policy=🌏 国内媒体, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list, tag=🌍 国外媒体, policy=🌍 国外媒体, enabled=true
+https://raw.githubusercontent.com/huanglittleming/self-rule-ini/master/UDP_IP.list, tag=🎯 UDP, policy=🎯 UDP, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list, tag=🚀 节点选择, policy=🚀 节点选择, enabled=true
+
+[URL Rewrite]
+
+# 远程重写
+[Remote Rewrite]
+https://raw.githubusercontent.com/Orz-3/QuantumultX/master/TikTok.conf, tag=Tiktok解锁, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Advertising/Advertising.plugin, tag=复写-去广告, enabled=true
+
+[Script]
+
+[Remote Script]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/AdvertisingScript/AdvertisingScript.plugin, tag=脚本-去广告, enabled=true
+
+[Plugin]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/zhihu/zhihu_plus.lnplugin, proxy=REJECT, tag=插件-知乎去广告, enabled=true
+
+[MITM]
+enable = true
+hostname = *.tiktokv.com, *.byteoversea.com, *.musical.ly, *.snssdk.com
+skip-server-cert-verify = true
