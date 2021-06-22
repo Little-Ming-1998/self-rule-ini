@@ -1,0 +1,74 @@
+[General]
+# 路由
+ipv6 = false
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+dns-server = 114.114.114.114,119.29.29.29,223.5.5.5
+allow-udp-proxy = true
+allow-wifi-access = false
+wifi-access-http-port = 7222
+wifi-access-socket5-port = 7221
+
+# URL test
+proxy-test-url = http://www.gstatic.com/generate_204
+test-timeout = 2
+
+# 资源解析器
+resource-parser = https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/scripts/sub-store-parser.js
+
+[Host]
+*.tencent.com = server:119.28.28.28
+*.weixin.com = server:119.28.28.28
+
+[Remote Proxy]
+
+#筛选地区
+[Remote Filter]
+手动切换 = NameRegex, FilterKey = ".*"
+
+[Proxy]
+
+[Proxy Group]
+# 策略组
+🚀 节点选择 = select, DIRECT, 手动切换
+🐦 Twitter = select, 🚀 节点选择, 手动切换, DIRECT
+📹 YouTube = select, 🚀 节点选择, 手动切换, DIRECT
+📺 巴哈姆特 = select, 🚀 节点选择, 手动切换, DIRECT
+🍎 Apple = select, DIRECT, 🚀 节点选择, 手动切换
+🎯 全球直连 = select, DIRECT, 🚀 节点选择
+🛑 广告拦截 = select, REJECT, DIRECT
+🐟 漏网之鱼 = select, 🚀 节点选择, DIRECT
+
+[Rule]
+GEOIP,CN,DIRECT
+FINAL,🐟 漏网之鱼
+
+# 远程分流
+[Remote Rule] 
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list, tag=🎯 全球直连, policy=🎯 全球直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list, tag=🛑 广告拦截, policy=🛑 广告拦截, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list, tag=🛑 广告拦截, policy=🛑 广告拦截, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitter.list, tag=🐦 Twitter, policy=🐦 Twitter, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list, tag=🍎 Apple, policy=🍎 Apple, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list, tag=📹 YouTube, policy=📹 YouTube, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list, tag=📺 巴哈姆特, policy=📺 巴哈姆特, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list, tag=🚀 节点选择, policy=🚀 节点选择, enabled=true
+
+[URL Rewrite]
+
+# 远程重写
+[Remote Rewrite]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Advertising/Advertising.plugin, tag=复写-去广告, enabled=true
+
+[Script]
+
+[Remote Script]
+
+[Plugin]
+
+[MITM]
