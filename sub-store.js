@@ -1990,7 +1990,7 @@ var ProxyUtils = (function () {
                             // remove old flag
                             proxy.name = removeFlag(proxy.name);
                             proxy.name = newFlag + " " + proxy.name;
-                            proxy.name = proxy.name.replace(/🇹🇼/g, "🇨🇳");
+                            //proxy.name = proxy.name.replace(/🇹🇼/g, "🇨🇳");
                         }
                         return proxy;
                     });
